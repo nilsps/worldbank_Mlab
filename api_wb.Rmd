@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+if(!require(WDI)){install.packages("WDI")}
+if(!require(ggplot2)){install.packages("ggplot2")}
+if(!require(dplyr)){install.packages("dplyr")}
+if(!require(tradestatistics)){install.packages("tradestatistics")}
+if(!require(DT)){install.packages("DT")}
+```
+
+```{r}
+Country_info = WDI_data
+
+ots_tab = datatable(ots_tables)
+view(ots_tab)
+```
+
+```{r}
+dat <- WDI(indicator='NY.GNP.PCAP.CD', 
+          country=c('CL','HU','UY'), start=1960, end=2012) 
+
+p <- ggplot(dat, aes(year, NY.GNP.PCAP.CD, color=country)) + 
+           geom_line() +
+            xlab('Year') + 
+            ylab('GDI per capita (Atlas Method USD)') +
+            labs(title <- "GNI Per Capita ($USD Atlas Method)")
+p
+```
+
+
+
+```{r}
+indicator_search = WDIsearch("GDP")[1:100,]
+view(indicator_search)
+```
+
