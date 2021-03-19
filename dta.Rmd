@@ -1,0 +1,36 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+if(!require(WDI)){install.packages("WDI")}
+if(!require(ggplot2)){install.packages("ggplot2")}
+if(!require(dplyr)){install.packages("dplyr")}
+if(!require(tradestatistics)){install.packages("tradestatistics")}
+if(!require(DT)){install.packages("DT")}
+if(!require(lubridate)){install.packages("lubridate")}
+if(!require(tidyverse)){install.packages("tidyverse")}
+
+library(tidyverse)                      # Activate the data science package
+library(lubridate)                      # Activate the date management package
+library(e1071)
+library(rpart)                          # Tree packages
+library(rpart.plot)                     # Tree plots package
+library(randomForest)                   # Package for random forests
+library(adabag)                         # Package for Adaboost
+library(xgboost)                        # Package for boosted trees
+library(fastAdaboost)
+library(dplyr)
+```
+
+```{r}
+all_dta = read.csv("data.csv")
+country_list = c("Country.A", "Country.B") 
+cou_invest = c("China")
+
+china_all_dta = all_dta %>% filter(Country.A == cou_invest | Country.B == cou_invest, Type == "Original")%>% unique() %>% as.matrix() 
+#View(china_all_dta)
+
+save(china_all_dta, file = "china_all_dta2020.Rdata")
+```
+
